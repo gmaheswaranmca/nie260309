@@ -1,0 +1,9 @@
+MERN stack app. Table trainer {name, skills}. 
+React JS vite app to have add trainer page and 
+list trainers page with bootstrap via cdn, 
+enabled nav bar based routing. Use port number 3000. 
+Expr app with ES6 single page code to connect to mongo atlas. 
+Use port 5000. Have some three records to display trainers, 
+for demo purpose. 
+Use server and port details and db url from env file. 
+Needed the folder structure too.
