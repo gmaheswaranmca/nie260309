@@ -106,7 +106,9 @@ git --version
 Example repo:
 
 ```bash
-git clone https://github.com/yourusername/mern-trainer-app.git
+# git clone https://github.com/yourusername/mern-trainer-app.git
+
+git clone https://github.com/gmaheswaranmca/mern-trainer-app.git
 ```
 
 Go inside:
