@@ -1,0 +1,70 @@
+Step:
+1. Launch EC2 Instance - 2 instances 
+	Region - Same 
+	VPC (Network) - Same 
+2. Keep Instances under Load Balancer
+
+Instances -> 
+	Name : EC2 Instances under ALB
+	Number of Instances: 2
+	VPC, Region all are same 
+	Amazon Linux - AMI
+	t3.micro + 64 bit 
+	Key - without key pair 
+	Create Security Group 
+		[x] SSH
+		[x] HTTP
+	Volume: 8GB 
+	User Data: 
+		!Have the script
+	-> Launch Instance 
+	
+!Instanced Launched Successfully
+
+EC2 -> Instances -> Check 
+	Both will have same names
+	Copy the ip address of each instance and run in the browser 
+	Make sure both are running...?
+	
+Target Group :
+	Create Target Group 
+		Target Type: Instances 
+		Target Group Name: ec2-under-lb-tg
+		Protocol and Port: Http 80
+		IP addr type: IPv4
+		VPC: Same as we assigned for our two instances 
+				ie default 
+		Protocol Version: Http1
+		Heath Check: HTTP	/
+		
+		->
+		Next 
+		->
+		Select the instances to be under ALB 
+		Give "Include as Pending Below"
+		-> We have two instances for our target grp 
+		-> Next 
+		-> See the details of TG 
+		-> Create Target Group 
+		"ec2-under-lb-tg" is created successfully.
+		
+Load Balancer 
+	-> Create Load Balancer 
+	-> Under "Application Load Balancer" 
+		-> Create 
+		Load Balancer Name: ec2-alb 
+		Scheme: Internet-facing 
+		Load balancer IP address type: IPv4 
+		VPC: Same as assigned to our EC2 instances 
+		Availability Zones and subnets: Pick all the zones (2 or 3)
+		Security Group: Same as we assigned to instances 
+		Listeners and Routing: Http 80 
+		Routing Action: Forward To Target Group
+			Target Group: "ec2-under-lb-tg"
+		-> Create Load Balancer 
+		! Load Balancer is created successfully 
+		Wait till the balancer is coming to "Active Status"
+		!copy the DNS of load balance and use in browser 
+		to check the load is distributed in instances 
+		by ensuing via the ip addr of the output we got.
+	
